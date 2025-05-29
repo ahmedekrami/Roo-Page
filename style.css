@@ -1,0 +1,212 @@
+
+/* Custom color classes for the gift shop theme */
+.bg-dark-brown { background-color: #7f5539; }
+.bg-muted-gold { background-color: #b08968; }
+.bg-light-beige { background-color: #ddb892; }
+.text-dark-brown { color: #7f5539; }
+.text-muted-gold { color: #b08968; }
+.text-light-beige { color: #ddb892; }
+.border-muted-gold { border-color: #b08968; }
+
+/* Font families */
+.playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Hero section styles */
+.hero-section {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ddb892 0%, #b08968 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Bouquet card hover effects */
+.bouquet-card {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.bouquet-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(127, 85, 57, 0.2);
+  border-color: #b08968;
+}
+
+/* Cart animation */
+.cart-icon {
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cart-icon:hover {
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #7f5539;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  min-width: 20px;
+}
+
+/* Button styles */
+.btn-primary-custom {
+  background: linear-gradient(45deg, #7f5539, #b08968);
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  border-radius: 50px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(127, 85, 57, 0.3);
+  color: white;
+}
+
+/* Navigation styles */
+.navbar-custom {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(127, 85, 57, 0.1);
+}
+
+/* Cart item styles */
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-name {
+  font-weight: 600;
+  color: #7f5539;
+  margin-bottom: 5px;
+}
+
+.cart-item-price {
+  color: #b08968;
+  font-weight: 500;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.quantity-btn {
+  background: #b08968;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quantity-btn:hover {
+  background: #7f5539;
+}
+
+.quantity-display {
+  font-weight: 600;
+  color: #7f5539;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 3rem !important;
+  }
+  
+  .hero-section p {
+    font-size: 1.1rem !important;
+  }
+  
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .cart-item img {
+    margin-bottom: 10px;
+  }
+  
+  .quantity-controls {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* Empty cart message */
+.empty-cart {
+  text-align: center;
+  padding: 40px 20px;
+  color: #b08968;
+}
+
+.empty-cart i {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
