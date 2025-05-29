@@ -167,19 +167,15 @@ function updateCartDisplay() {
       <img src="${item.image}" alt="${item.name}">
       <div class="cart-item-details">
         <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-price">$${item.price.toFixed(2)} each</div>
-        <div class="quantity-controls">
-          <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">
-            <i class="fas fa-minus"></i>
-          </button>
-          <span class="quantity-display">${item.quantity}</span>
-          <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">
-            <i class="fas fa-plus"></i>
-          </button>
-          <button class="btn btn-sm btn-outline-danger ms-3" onclick="removeFromCart(${item.id})">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
+        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+      </div>
+      <div class="cart-item-quantity">
+        <button onclick="updateQuantity(${item.id}, -1)">-</button>
+        <span>${item.quantity}</span>
+        <button onclick="updateQuantity(${item.id}, 1)">+</button>
+      </div>
+      <div class="cart-item-remove">
+        <button onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button>
       </div>
     `;
     cartItemsContainer.appendChild(cartItem);
@@ -188,83 +184,22 @@ function updateCartDisplay() {
   cartTotal.textContent = total.toFixed(2);
 }
 
-function toggleCart() {
-  updateCartDisplay();
-  const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
-  cartModal.show();
-}
-
-function openWhatsAppCheckout() {
-  if (cart.length === 0) {
-    alert('Your cart is empty. Please add some items before checkout.');
-    return;
-  }
-
-  let orderText = "Hello! I'd like to place an order:\n\n";
-  let total = 0;
-
-  cart.forEach(item => {
-    const itemTotal = item.price * item.quantity;
-    total += itemTotal;
-    orderText += `${item.name} x${item.quantity} - $${itemTotal.toFixed(2)}\n`;
-  });
-
-  orderText += `\nTotal: $${total.toFixed(2)}\n\nThank you!`;
-
-  const whatsappNumber = "201066509696"; // <-- Replace with your number
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderText)}`;
-
-  window.open(whatsappUrl, '_blank');
-}
-
-function scrollToMenu() {
-  document.getElementById('menu-section').scrollIntoView({ behavior: 'smooth' });
-}
-
 function showAddToCartFeedback() {
   const feedback = document.createElement('div');
-  feedback.style.cssText = `
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: linear-gradient(45deg, #7f5539, #b08968);
-    color: white;
-    padding: 15px 25px;
-    border-radius: 50px;
-    z-index: 9999;
-    font-weight: 500;
-    box-shadow: 0 10px 20px rgba(127, 85, 57, 0.3);
-    transition: all 0.3s ease;
-    transform: translateY(-20px);
-    opacity: 0;
-  `;
-  feedback.innerHTML = '<i class="fas fa-check me-2"></i>Added to cart!';
-
+  feedback.className = 'add-to-cart-feedback';
+  feedback.textContent = 'Added to Cart!';
   document.body.appendChild(feedback);
-
   setTimeout(() => {
-    feedback.style.transform = 'translateY(0)';
-    feedback.style.opacity = '1';
-  }, 100);
-
-  setTimeout(() => {
-    feedback.style.transform = 'translateY(-20px)';
-    feedback.style.opacity = '0';
-    setTimeout(() => {
-      document.body.removeChild(feedback);
-    }, 300);
+    feedback.remove();
   }, 2000);
 }
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+function checkout() {
+  let message = 'Checkout:\n\n';
+  cart.forEach(item => {
+    message += `${item.name} x ${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
   });
-});
+  message += `\nTotal: $${document.getElementById('cart-total').textContent}`;
+  window.open(`https://wa.me/1234567890?text=${encodeURIComponent(message)}`, '_blank');
+}
+
