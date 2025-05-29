@@ -211,7 +211,7 @@ function openWhatsAppCheckout() {
 
   orderText += `\nTotal: $${total.toFixed(2)}\n\nThank you!`;
 
-  const whatsappNumber = "201094543689"; // <-- Replace with your number
+  const whatsappNumber = "201066509696"; // <-- Replace with your number
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderText)}`;
 
   window.open(whatsappUrl, '_blank');
